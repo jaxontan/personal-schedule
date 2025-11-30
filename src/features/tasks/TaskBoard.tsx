@@ -61,22 +61,12 @@ export function TaskBoard() {
                             <h2 className="text-xl font-semibold mb-4">Completed</h2>
                             <div className="space-y-2 opacity-70">
                                 {completedTasks.map((task, index) => (
-                                    // We don't drag completed tasks for now, or we can but need a separate list ID
-                                    // Just rendering them as items without drag handle or disabled drag
-                                    <div key={task.id} className="opacity-60 pointer-events-none">
-                                        <TaskItem task={task} index={index} />
-                                    </div>
-                                    // Actually TaskItem requires index and is draggable. 
-                                    // Let's just render a simplified view or wrap in a non-droppable area?
-                                    // Or just reuse TaskItem but it might error if not in Droppable.
-                                    // Let's just manually render a card for completed to avoid DND complexity for now.
-                                ))}
-                                {/* Re-implementing simplified card for completed to avoid DND issues outside Context */}
-                                {completedTasks.map(task => (
-                                    <div key={task.id} className="p-4 border rounded-lg bg-muted/50 flex items-center justify-between">
-                                        <span className="line-through text-muted-foreground">{task.title}</span>
-                                        <span className="text-xs text-muted-foreground">Completed</span>
-                                    </div>
+                                    <TaskItem
+                                        key={task.id}
+                                        task={task}
+                                        index={index}
+                                        isDraggable={false}
+                                    />
                                 ))}
                             </div>
                         </div>
