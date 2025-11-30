@@ -77,7 +77,7 @@ export function DeadlineTimeline() {
                                     const isOverdue = isPast(date) && !isToday(date) && !subtask.isCompleted;
 
                                     return (
-                                        <div key={subtask.id} className="relative pl-8">
+                                        <div key={subtask.id} className="relative pl-4 md:pl-8">
                                             {/* Dot */}
                                             <div
                                                 className={cn(
@@ -88,7 +88,7 @@ export function DeadlineTimeline() {
                                             />
 
                                             <Card className={cn("transition-all hover:shadow-md", subtask.isCompleted && "opacity-60")}>
-                                                <CardContent className="p-4">
+                                                <CardContent className="p-3 md:p-4">
                                                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                                                         <div className="flex-1">
                                                             <div className="flex items-center gap-2">

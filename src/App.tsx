@@ -18,7 +18,7 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/5">
       {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-20 bg-card/80 backdrop-blur-xl border-r border-border/50 flex flex-col items-center py-8 gap-6 z-50 shadow-xl">
+      <aside className="hidden md:flex fixed left-0 top-0 h-full w-20 bg-card/80 backdrop-blur-xl border-r border-border/50 flex-col items-center py-8 gap-6 z-50 shadow-xl">
         <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center mb-4 shadow-lg shadow-primary/30">
           <LayoutDashboard className="h-6 w-6 text-primary-foreground" />
         </div>
@@ -57,8 +57,8 @@ function AppContent() {
       </aside>
 
       {/* Main Content */}
-      <main className="ml-20 min-h-screen">
-        <div className="container mx-auto p-8">
+      <main className="ml-0 md:ml-20 min-h-screen pb-24 md:pb-0 transition-all duration-300">
+        <div className="container mx-auto p-4 md:p-8">
           <AnimatePresence mode="wait">
             {view === 'dashboard' && (
               <PageTransition key="dashboard">
@@ -85,7 +85,7 @@ function AppContent() {
       </main>
 
       {/* Mobile Bottom Nav */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-xl border-t border-border/50 px-4 py-3 flex justify-around shadow-2xl">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-xl border-t border-border/50 px-4 py-3 flex justify-around shadow-2xl z-50 safe-area-bottom">
         {[
           { id: 'dashboard', icon: LayoutDashboard },
           { id: 'tasks', icon: ListTodo },

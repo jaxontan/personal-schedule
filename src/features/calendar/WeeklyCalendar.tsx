@@ -40,7 +40,7 @@ export function WeeklyCalendar() {
 
     return (
         <div className="space-y-6">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-4xl font-bold tracking-tight font-heading bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                         Calendar
@@ -49,7 +49,7 @@ export function WeeklyCalendar() {
                         {viewMode === 'monthly' ? 'Monthly view of your schedule' : '7-day view of your schedule'}
                     </p>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-4">
                     {/* View Mode Toggle */}
                     <div className="flex gap-2">
                         <Button
@@ -72,20 +72,20 @@ export function WeeklyCalendar() {
 
                     {/* Month Navigation (only for monthly view) */}
                     {viewMode === 'monthly' && (
-                        <>
+                        <div className="flex items-center gap-2">
                             <Button variant="outline" size="icon" onClick={prevMonth}>
                                 <ChevronLeft className="h-4 w-4" />
                             </Button>
-                            <h2 className="text-2xl font-semibold font-heading min-w-[200px] text-center">
+                            <h2 className="text-xl md:text-2xl font-semibold font-heading min-w-[140px] md:min-w-[200px] text-center">
                                 {format(currentMonth, 'MMMM yyyy')}
                             </h2>
                             <Button variant="outline" size="icon" onClick={nextMonth}>
                                 <ChevronRight className="h-4 w-4" />
                             </Button>
-                        </>
+                        </div>
                     )}
                     {viewMode === 'weekly' && (
-                        <h2 className="text-2xl font-semibold font-heading">
+                        <h2 className="text-lg md:text-2xl font-semibold font-heading">
                             {format(weekStart, 'MMM d')} - {format(weekEnd, 'MMM d, yyyy')}
                         </h2>
                     )}
@@ -95,9 +95,9 @@ export function WeeklyCalendar() {
             {/* Monthly View */}
             {
                 viewMode === 'monthly' && (
-                    <Card>
-                        <CardContent className="p-0">
-                            <div className="grid grid-cols-7">
+                    <Card className="overflow-hidden">
+                        <CardContent className="p-0 overflow-x-auto">
+                            <div className="grid grid-cols-7 min-w-[800px]">
                                 {/* Day Headers */}
                                 {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
                                     <div
