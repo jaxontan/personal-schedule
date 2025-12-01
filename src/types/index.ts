@@ -34,3 +34,20 @@ export interface ThemeContextType {
     theme: 'light' | 'dark';
     toggleTheme: () => void;
 }
+
+export interface DailyTask {
+    id: string;
+    title: string;
+    taskDate: string; // ISO date string (YYYY-MM-DD)
+    isCompleted: boolean;
+    completedAt?: string; // ISO timestamp
+    createdAt: string;
+}
+
+export interface DailyTaskContextType {
+    dailyTasks: DailyTask[];
+    addDailyTask: (title: string, taskDate: string) => Promise<void>;
+    toggleDailyTask: (id: string) => Promise<void>;
+    deleteDailyTask: (id: string) => Promise<void>;
+    cleanupOldTasks: () => Promise<void>;
+}

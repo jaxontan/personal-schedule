@@ -1,18 +1,20 @@
 import { useState } from 'react';
 import { TaskProvider } from './context/TaskContext';
+import { DailyTaskProvider } from './context/DailyTaskContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { Dashboard } from './features/dashboard/Dashboard';
 import { TaskBoard } from './features/tasks/TaskBoard';
+import { DailyTaskBoard } from './features/daily/DailyTaskBoard';
 import { WeeklyCalendar } from './features/calendar/WeeklyCalendar';
 import { DeadlineTimeline } from './features/timeline/DeadlineTimeline';
 import { Button } from './components/ui/Button';
-import { LayoutDashboard, ListTodo, Calendar, Clock, Sun, Moon } from 'lucide-react';
+import { LayoutDashboard, ListTodo, Calendar, Clock, Sun, Moon, CalendarCheck } from 'lucide-react';
 import { cn } from './utils/cn';
 import { AnimatePresence } from 'framer-motion';
 import { PageTransition } from './components/ui/PageTransition';
 
 function AppContent() {
-  const [view, setView] = useState<'dashboard' | 'tasks' | 'calendar' | 'timeline'>('dashboard');
+  const [view, setView] = useState<'dashboard' | 'tasks' | 'daily' | 'calendar' | 'timeline'>('dashboard');
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -26,6 +28,7 @@ function AppContent() {
         <nav className="flex-1 flex flex-col gap-3">
           {[
             { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+            { id: 'daily', icon: CalendarCheck, label: 'Daily Tasks' },
             { id: 'tasks', icon: ListTodo, label: 'Tasks' },
             { id: 'calendar', icon: Calendar, label: 'Calendar' },
             { id: 'timeline', icon: Clock, label: 'Timeline' },
@@ -65,6 +68,11 @@ function AppContent() {
                 <Dashboard />
               </PageTransition>
             )}
+            {view === 'daily' && (
+              <PageTransition key="daily">
+                <DailyTaskBoard />
+              </PageTransition>
+            )}
             {view === 'tasks' && (
               <PageTransition key="tasks">
                 <TaskBoard />
@@ -85,9 +93,10 @@ function AppContent() {
       </main>
 
       {/* Mobile Bottom Nav */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-xl border-t border-border/50 px-4 py-3 flex justify-around shadow-2xl z-50 safe-area-bottom">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-xl border-t border-border/50 px-2 py-3 flex justify-around shadow-2xl z-50 safe-area-bottom">
         {[
           { id: 'dashboard', icon: LayoutDashboard },
+          { id: 'daily', icon: CalendarCheck },
           { id: 'tasks', icon: ListTodo },
           { id: 'calendar', icon: Calendar },
           { id: 'timeline', icon: Clock },
@@ -114,7 +123,9 @@ function App() {
   return (
     <ThemeProvider>
       <TaskProvider>
-        <AppContent />
+        <DailyTaskProvider>
+          <AppContent />
+        </DailyTaskProvider>
       </TaskProvider>
     </ThemeProvider>
   );
