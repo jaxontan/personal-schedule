@@ -6,7 +6,6 @@ import { Input } from '../../components/ui/Input';
 import { Card } from '../../components/ui/Card';
 import { Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 
-
 export function DailyTaskBoard() {
     const { dailyTasks, addDailyTask } = useDailyTasks();
     const [newTaskTitle, setNewTaskTitle] = useState('');
